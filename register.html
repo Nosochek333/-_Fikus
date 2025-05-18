@@ -6,13 +6,13 @@
     <title>Fikus - Роскошная регистрация</title>
     <style>
         :root {
-            --primary-color: #4a148c;
-            --secondary-color: #7b1fa2;
-            --accent-color: #e91e63;
-            --light-color: #f3e5f5;
-            --dark-color: #12005e;
-            --text-color: #212121;
-            --shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            --primary-purple: #6a0dad;
+            --dark-purple: #4b0082;
+            --electric-blue: #4a00e0;
+            --violet: #8a2be2;
+            --light-accent: #9370db;
+            --text-color: #f8f9fa;
+            --shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
         * {
@@ -23,23 +23,49 @@
         }
         
         body {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             color: var(--text-color);
+            background: linear-gradient(-45deg, var(--dark-purple), var(--electric-blue), var(--violet), var(--primary-purple));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 40%);
+            z-index: -1;
         }
         
         .registration-container {
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             width: 100%;
-            max-width: 800px;
+            max-width: 500px;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            display: flex;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
             animation: fadeIn 0.8s ease-in-out;
         }
         
@@ -48,67 +74,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .registration-image {
-            flex: 1;
-            background: url('https://source.unsplash.com/random/600x800?luxury') no-repeat center center;
-            background-size: cover;
-            position: relative;
-            display: none;
-        }
-        
-        .registration-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(74, 20, 140, 0.7), rgba(123, 31, 162, 0.7));
-        }
-        
-        .registration-image-content {
-            position: relative;
-            z-index: 1;
-            padding: 40px;
-            color: white;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        
-        .registration-image-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .registration-image-content p {
-            font-size: 1.1rem;
-            line-height: 1.6;
+        .form-header {
+            text-align: center;
             margin-bottom: 30px;
         }
         
-        .registration-form {
-            flex: 1;
-            padding: 50px;
-            position: relative;
-        }
-        
-        .form-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
         .form-header h1 {
-            color: var(--primary-color);
+            color: white;
             font-size: 2.2rem;
             margin-bottom: 10px;
             font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .form-header p {
-            color: #666;
+            color: rgba(255,255,255,0.8);
             font-size: 1rem;
         }
         
@@ -120,34 +100,34 @@
         .input-group input {
             width: 100%;
             padding: 15px 20px;
-            border: 2px solid #ddd;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50px;
             font-size: 1rem;
             transition: all 0.3s;
             outline: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(255,255,255,0.5);
         }
         
         .input-group input:focus {
-            border-color: var(--secondary-color);
+            border-color: white;
+            background: rgba(255,255,255,0.2);
         }
         
         .input-group label {
             position: absolute;
-            top: 15px;
-            left: 20px;
-            color: #999;
-            transition: all 0.3s;
-            pointer-events: none;
-            background: white;
-            padding: 0 5px;
-        }
-        
-        .input-group input:focus + label,
-        .input-group input:not(:placeholder-shown) + label {
             top: -10px;
             left: 15px;
+            color: white;
             font-size: 0.8rem;
-            color: var(--secondary-color);
+            background: var(--primary-purple);
+            padding: 0 10px;
+            border-radius: 20px;
+            pointer-events: none;
         }
         
         .terms {
@@ -158,22 +138,24 @@
         
         .terms input {
             margin-right: 10px;
+            accent-color: var(--primary-purple);
         }
         
         .terms label {
             font-size: 0.9rem;
-            color: #666;
+            color: rgba(255,255,255,0.8);
         }
         
         .terms label a {
-            color: var(--secondary-color);
-            text-decoration: none;
+            color: white;
+            text-decoration: underline;
+            font-weight: 500;
         }
         
         .submit-btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(to right, var(--primary-purple), var(--electric-blue));
             border: none;
             border-radius: 50px;
             color: white;
@@ -181,12 +163,15 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(123, 31, 162, 0.4);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(to right, var(--electric-blue), var(--primary-purple));
         }
         
         .submit-btn:active {
@@ -197,12 +182,14 @@
             text-align: center;
             margin-top: 20px;
             font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
         }
         
         .login-link a {
-            color: var(--secondary-color);
+            color: white;
             text-decoration: none;
             font-weight: 600;
+            margin-left: 5px;
         }
         
         .social-login {
@@ -211,7 +198,7 @@
         }
         
         .social-login p {
-            color: #666;
+            color: rgba(255,255,255,0.8);
             font-size: 0.9rem;
             margin-bottom: 15px;
             position: relative;
@@ -224,7 +211,7 @@
             top: 50%;
             width: 30%;
             height: 1px;
-            background: #ddd;
+            background: rgba(255,255,255,0.3);
         }
         
         .social-login p::before {
@@ -248,140 +235,124 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255,255,255,0.1);
             color: white;
             font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .social-icon:hover {
+            background: rgba(255,255,255,0.2);
             transform: translateY(-3px);
         }
         
-        .facebook {
-            background: #3b5998;
-        }
-        
-        .twitter {
-            background: #1da1f2;
-        }
-        
-        .google {
-            background: #db4437;
-        }
-        
         .error-message {
-            color: #e91e63;
-            font-size: 0.9rem;
+            color: #ff6b6b;
+            font-size: 0.8rem;
             margin-top: 5px;
+            padding-left: 15px;
             display: none;
         }
         
         .success-message {
-            color: #4caf50;
+            color: #51cf66;
             font-size: 1rem;
             text-align: center;
             margin-bottom: 20px;
             display: none;
         }
         
-        .decoration {
+        .floating-elements {
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .floating-element {
+            position: absolute;
             border-radius: 50%;
-            background: rgba(233, 30, 99, 0.1);
-            z-index: 0;
+            background: rgba(255,255,255,0.05);
+            animation: float 15s infinite linear;
         }
         
-        .decoration-1 {
-            top: -50px;
-            right: -50px;
-        }
-        
-        .decoration-2 {
-            bottom: -50px;
-            left: -50px;
-        }
-        
-        @media (min-width: 992px) {
-            .registration-image {
-                display: block;
-            }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(720deg); }
         }
     </style>
 </head>
 <body>
+    <div class="floating-elements">
+        <div class="floating-element" style="width: 100px; height: 100px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-element" style="width: 150px; height: 150px; top: 60%; left: 70%; animation-delay: 2s; animation-duration: 20s;"></div>
+        <div class="floating-element" style="width: 80px; height: 80px; top: 80%; left: 30%; animation-delay: 4s; animation-duration: 18s;"></div>
+        <div class="floating-element" style="width: 120px; height: 120px; top: 30%; left: 50%; animation-delay: 6s; animation-duration: 25s;"></div>
+    </div>
+    
     <div class="registration-container">
-        <div class="registration-image">
-            <div class="registration-image-content">
-                <h2>Добро пожаловать в Fikus</h2>
-                <p>Присоединяйтесь к нашему эксклюзивному сообществу и получите доступ к уникальным возможностям и контенту.</p>
-            </div>
+        <div class="form-header">
+            <h1>Создать аккаунт</h1>
+            <p>Заполните форму ниже, чтобы зарегистрироваться</p>
         </div>
         
-        <div class="registration-form">
-            <div class="decoration decoration-1"></div>
-            <div class="decoration decoration-2"></div>
-            
-            <div class="form-header">
-                <h1>Создать аккаунт</h1>
-                <p>Заполните форму ниже, чтобы зарегистрироваться</p>
+        <div class="success-message" id="successMessage">
+            Регистрация прошла успешно! Перенаправляем вас на сайт...
+        </div>
+        
+        <form id="registrationForm">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Имя пользователя" required>
+                <label for="username">Имя пользователя</label>
+                <div class="error-message" id="usernameError">Это имя пользователя уже занято</div>
             </div>
             
-            <div class="success-message" id="successMessage">
-                Регистрация прошла успешно! Перенаправляем вас на сайт...
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email адрес" required>
+                <label for="email">Email адрес</label>
+                <div class="error-message" id="emailError">Этот email уже зарегистрирован</div>
             </div>
             
-            <form id="registrationForm">
-                <div class="input-group">
-                    <input type="text" id="username" placeholder=" " required>
-                    <label for="username">Имя пользователя</label>
-                    <div class="error-message" id="usernameError">Это имя пользователя уже занято</div>
-                </div>
-                
-                <div class="input-group">
-                    <input type="email" id="email" placeholder=" " required>
-                    <label for="email">Email адрес</label>
-                    <div class="error-message" id="emailError">Этот email уже зарегистрирован</div>
-                </div>
-                
-                <div class="input-group">
-                    <input type="password" id="password" placeholder=" " required minlength="8">
-                    <label for="password">Пароль</label>
-                    <div class="error-message" id="passwordError">Пароль должен содержать минимум 8 символов</div>
-                </div>
-                
-                <div class="input-group">
-                    <input type="password" id="confirmPassword" placeholder=" " required>
-                    <label for="confirmPassword">Подтвердите пароль</label>
-                    <div class="error-message" id="confirmPasswordError">Пароли не совпадают</div>
-                </div>
-                
-                <div class="terms">
-                    <input type="checkbox" id="agreeTerms" required>
-                    <label for="agreeTerms">Я согласен с <a href="#">Условиями использования</a> и <a href="#">Политикой конфиденциальности</a></label>
-                </div>
-                
-                <button type="submit" class="submit-btn">Зарегистрироваться</button>
-            </form>
-            
-            <div class="login-link">
-                Уже есть аккаунт? <a href="#">Войти</a>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Пароль" required minlength="8">
+                <label for="password">Пароль</label>
+                <div class="error-message" id="passwordError">Пароль должен содержать минимум 8 символов</div>
             </div>
             
-            <div class="social-login">
-                <p>Или войти с помощью</p>
-                <div class="social-icons">
-                    <div class="social-icon facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <div class="social-icon twitter">
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                    <div class="social-icon google">
-                        <i class="fab fa-google"></i>
-                    </div>
+            <div class="input-group">
+                <input type="password" id="confirmPassword" placeholder="Подтвердите пароль" required>
+                <label for="confirmPassword">Подтвердите пароль</label>
+                <div class="error-message" id="confirmPasswordError">Пароли не совпадают</div>
+            </div>
+            
+            <div class="terms">
+                <input type="checkbox" id="agreeTerms" required>
+                <label for="agreeTerms">Я согласен с <a href="#">Условиями использования</a> и <a href="#">Политикой конфиденциальности</a></label>
+            </div>
+            
+            <button type="submit" class="submit-btn">Зарегистрироваться</button>
+        </form>
+        
+        <div class="login-link">
+            Уже есть аккаунт? <a href="#">Войти</a>
+        </div>
+        
+        <div class="social-login">
+            <p>Или войти с помощью</p>
+            <div class="social-icons">
+                <div class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-icon">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="social-icon">
+                    <i class="fab fa-twitter"></i>
                 </div>
             </div>
         </div>
@@ -390,73 +361,82 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        // Создаем дополнительные плавающие элементы
+        function createFloatingElements() {
+            const container = document.querySelector('.floating-elements');
+            for (let i = 0; i < 5; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                const size = Math.random() * 100 + 50;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 15;
+                
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.top = `${posY}%`;
+                element.style.left = `${posX}%`;
+                element.style.animationDelay = `${delay}s`;
+                element.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(element);
+            }
+        }
+        
+        // Инициализация плавающих элементов
+        createFloatingElements();
+        
+        // Обработка формы регистрации
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Сброс сообщений об ошибках
             document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
             
             // Получение значений полей
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             const agreeTerms = document.getElementById('agreeTerms').checked;
             
-            // Валидация пароля
+            // Валидация
             if (password.length < 8) {
                 document.getElementById('passwordError').style.display = 'block';
                 return;
             }
             
-            // Проверка совпадения паролей
             if (password !== confirmPassword) {
                 document.getElementById('confirmPasswordError').style.display = 'block';
                 return;
             }
             
-            // Проверка согласия с условиями
             if (!agreeTerms) {
                 alert('Пожалуйста, согласитесь с условиями использования');
                 return;
             }
             
-            // Отправка данных на сервер
-            axios.post('https://api.jsonbin.io/v3/b', {
-                username,
-                email,
-                password // В реальном приложении пароль должен быть захеширован
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': '$2a$10$YOUR_API_KEY_HERE', // Замените на ваш реальный API ключ
-                    'X-Bin-Name': 'fikus-users'
-                }
-            })
-            .then(response => {
-                // Проверка на существующего пользователя (эмуляция)
-                if (Math.random() < 0.1) { // 10% шанс "ошибки" для демонстрации
-                    if (Math.random() < 0.5) {
-                        document.getElementById('usernameError').style.display = 'block';
-                    } else {
-                        document.getElementById('emailError').style.display = 'block';
-                    }
-                    return;
-                }
+            try {
+                // Эмуляция отправки данных
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // В реальном проекте здесь будет запрос к API
+                // axios.post('https://api.jsonbin.io/v3/b', { ... }, { headers: { ... } });
                 
                 // Успешная регистрация
                 document.getElementById('successMessage').style.display = 'block';
                 document.getElementById('registrationForm').style.display = 'none';
                 
-                // Перенаправление через 3 секунды
+                // Перенаправление
                 setTimeout(() => {
                     window.location.href = 'https://nosochek333.github.io/-_Fikus/';
                 }, 3000);
-            })
-            .catch(error => {
-                console.error('Ошибка регистрации:', error);
-                alert('Произошла ошибка при регистрации. Пожалуйста, попробуйте позже.');
-            });
+                
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка регистрации: ' + (error.response?.data?.message || error.message));
+            }
         });
     </script>
 </body>
