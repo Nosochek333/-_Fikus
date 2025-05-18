@@ -28,6 +28,27 @@
         }
         
         body {
+             .register-btn {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.register-btn:hover {
+    background: linear-gradient(45deg, #2575fc, #6a11cb);
+}
+
+            }
+            
+            .register-btn:hover {
+                background: linear-gradient(45deg, #2575fc, #6a11cb);
+            }
+
             font-family: 'Montserrat', sans-serif;
             background-color: var(--black);
             color: var(--light-gray);
@@ -37,6 +58,8 @@
                 radial-gradient(circle at 20% 30%, rgba(93, 27, 138, 0.15) 0%, transparent 30%),
                 radial-gradient(circle at 80% 70%, rgba(156, 77, 202, 0.15) 0%, transparent 30%);
         }
+
+        <button class="register-btn" onclick="location.href='register.html'">Зарегистрироваться</button>
         
         /* Шапка с параллакс эффектом */
         .header-wrapper {
