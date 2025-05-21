@@ -6,26 +6,25 @@
     <title>PHYCUS | Элитные фикусы</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4290/4290854.png">
     <style>
         :root {
             --dark-purple: #0f0520;
             --medium-purple: #2a0a4a;
             --light-purple: #5a1b8a;
-            --accent-purple: #9c4dca;ф
+            --accent-purple: #9c4dca;
             --neon-purple: #d16bff;
             --black: #050505;
             --dark-gray: #121212;
             --light-gray: #e0e0e0;
             --white: #ffffff;
             --gold: #ffd700;
+            --green: #70e000;
+            --red: #ed254e;
+            --blue: #3a86ff;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--black);
@@ -36,14 +35,13 @@
                 radial-gradient(circle at 20% 30%, rgba(93, 27, 138, 0.15) 0%, transparent 30%),
                 radial-gradient(circle at 80% 70%, rgba(156, 77, 202, 0.15) 0%, transparent 30%);
         }
-        
+        ::selection { background: var(--accent-purple); color: var(--white);}
         /* Шапка с параллакс эффектом */
         .header-wrapper {
             height: 100vh;
             overflow: hidden;
             position: relative;
         }
-        
         header {
             background: linear-gradient(135deg, var(--dark-purple), var(--black));
             color: var(--white);
@@ -58,13 +56,9 @@
             box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
             overflow: hidden;
         }
-        
         .header-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
                 url('https://images.unsplash.com/photo-1598880940080-ff9a29891b85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'),
                 url('https://images.unsplash.com/photo-1598880940080-ff9a29891b85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
@@ -74,7 +68,6 @@
             opacity: 0.15;
             z-index: 0;
         }
-        
         .header-content {
             position: relative;
             z-index: 2;
@@ -83,13 +76,11 @@
             padding: 2rem;
             backdrop-filter: blur(2px);
         }
-        
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
             letter-spacing: 1px;
         }
-        
         h1 {
             font-size: 4.5rem;
             margin-bottom: 1.5rem;
@@ -99,7 +90,6 @@
             text-shadow: 0 0 30px rgba(156, 77, 202, 0.4);
             line-height: 1.1;
         }
-        
         .subtitle {
             font-size: 1.4rem;
             opacity: 0.9;
@@ -108,7 +98,6 @@
             position: relative;
             display: inline-block;
         }
-        
         .subtitle::after {
             content: '';
             position: absolute;
@@ -119,7 +108,6 @@
             height: 3px;
             background: linear-gradient(to right, var(--accent-purple), var(--gold));
         }
-        
         .scroll-down {
             position: absolute;
             bottom: 30px;
@@ -133,12 +121,18 @@
             opacity: 0.7;
             transition: opacity 0.3s;
         }
-        
-        .scroll-down:hover {
-            opacity: 1;
-            color: var(--neon-purple);
+        .scroll-down:hover { opacity: 1; color: var(--neon-purple);}
+        /* Партиклы */
+        .particles, .particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
         }
-        
+        .particles { top:0; left:0; width:100%; height:100%;}
+        .particle {
+            background: rgba(156, 77, 202, 0.5);
+            border-radius: 50%;
+        }
         /* Навигация */
         nav {
             background-color: rgba(15, 5, 32, 0.98);
@@ -152,12 +146,10 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
         }
-        
         nav.scrolled {
             padding: 0.8rem;
             background-color: rgba(10, 2, 22, 0.98);
         }
-        
         .nav-container {
             display: flex;
             justify-content: center;
@@ -166,7 +158,6 @@
             margin: 0 auto;
             flex-wrap: wrap;
         }
-        
         nav a {
             color: var(--white);
             text-decoration: none;
@@ -181,12 +172,10 @@
             align-items: center;
             gap: 0.7rem;
         }
-        
         nav a:hover {
             color: var(--neon-purple);
             opacity: 1;
         }
-        
         nav a::after {
             content: '';
             position: absolute;
@@ -197,11 +186,152 @@
             background: linear-gradient(to right, var(--neon-purple), var(--gold));
             transition: width 0.4s ease;
         }
-        
         nav a:hover::after {
             width: 100%;
         }
-        
+        /* Registration button */
+        .button-container {
+            position: relative;
+            top: 50px; left: 1250px;
+        }
+        .reg-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(74, 0, 224, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .reg-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(74, 0, 224, 1);
+        }
+        /* Модалки, инфокнопка, корзина */
+        .info-btn, .cart-btn, .theme-toggler {
+            position: fixed;
+            z-index: 2000;
+            border: none;
+            border-radius: 9px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(74, 0, 224, 0.7);
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: #fff;
+        }
+        .info-btn { top: 30px; left: 30px; padding: 12px 22px; font-size: 17px;}
+        .cart-btn { top: 30px; right: 30px; padding: 12px 24px; font-size: 18px; border-radius: 11px; display: flex; align-items: center; gap: 0.7rem;}
+        .cart-btn-count {
+            background: #ffd700; color: #4a00e0; font-size: 0.9em; font-weight: bold;
+            border-radius: 50%; padding: 2px 9px;
+        }
+        .theme-toggler {
+            padding: 10px 18px;
+            right: 30px; top: 90px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            color: #4a00e0;
+            font-size: 1.5rem;
+            text-align: center;
+            min-width: 220px;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 10px 32px rgba(74,0,224,0.10);
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            right: 18px; top: 10px;
+            font-size: 1.3rem;
+            background: none;
+            border: none;
+            color: #4a00e0;
+            cursor: pointer;
+        }
+        /* Корзина */
+        .cart-modal .modal-content {
+            min-width: 350px; font-size: 1.1rem;
+        }
+        .cart-items-list {
+            margin: 15px 0 18px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .cart-item {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .cart-item-title { max-width: 120px; }
+        .cart-item-controls {
+            display: flex; align-items: center; gap: 7px;
+        }
+        .cart-item-btn {
+            background: #8e2de2;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 28px; height: 28px;
+            font-size: 1.08em;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+        .cart-total {
+            font-size: 1.17em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #8e2de2;
+        }
+        .cart-pay-btn {
+            background: linear-gradient(135deg, #ffd700, #8e2de2);
+            color: #4a00e0;
+            padding: 11px 25px;
+            border-radius: 9px;
+            font-weight: 700;
+            border: none;
+            font-size: 1.08em;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 3px 12px rgba(74,0,224,0.13);
+        }
+        .cart-empty { color: #888; margin: 1.7em 0 1em 0; text-align: center; }
+        .cart-items-list::-webkit-scrollbar { width: 0; }
+        /* Кнопка "В корзину" */
+        .add-to-cart-btn {
+            display: none;
+            position: absolute;
+            left: 50%; top: 60%;
+            transform: translate(-50%, 0);
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 9px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            opacity: 0.94;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 5;
+            box-shadow: 0 3px 12px rgba(74,0,224,0.13);
+        }
+        .gallery-item:hover .add-to-cart-btn {
+            display: block;
+        }
         /* Основное содержимое */
         main {
             padding: 6rem 2rem;
@@ -209,7 +339,6 @@
             margin: 0 auto;
             position: relative;
         }
-        
         .section-divider {
             width: 100%;
             height: 1px;
@@ -217,7 +346,6 @@
             margin: 4rem 0;
             opacity: 0.5;
         }
-        
         section {
             margin-bottom: 5rem;
             padding: 3.5rem;
@@ -229,14 +357,10 @@
             position: relative;
             overflow: hidden;
         }
-        
         section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(
                 45deg, 
                 transparent 65%, 
@@ -245,12 +369,10 @@
             );
             z-index: -1;
         }
-        
         section:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
-        
         h2 {
             font-size: 3rem;
             margin-bottom: 2rem;
@@ -258,7 +380,6 @@
             position: relative;
             display: inline-block;
         }
-        
         h2::after {
             content: '';
             position: absolute;
@@ -269,14 +390,7 @@
             background: linear-gradient(to right, var(--accent-purple), var(--gold));
             border-radius: 2px;
         }
-        
-        p {
-            margin-bottom: 1.8rem;
-            font-size: 1.15rem;
-            line-height: 1.9;
-            opacity: 0.9;
-        }
-        
+        p { margin-bottom: 1.8rem; font-size: 1.15rem; line-height: 1.9; opacity: 0.9;}
         /* Галерея */
         .gallery {
             display: grid;
@@ -284,7 +398,6 @@
             gap: 2rem;
             padding: 1.5rem 0;
         }
-        
         .gallery-item {
             position: relative;
             border-radius: 15px;
@@ -294,71 +407,42 @@
             aspect-ratio: 1/1.2;
             cursor: pointer;
         }
-        
         .gallery-item:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 35px rgba(156, 77, 202, 0.4);
         }
-        
         .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100%; height: 100%; object-fit: cover;
             transition: transform 0.7s ease;
         }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
+        .gallery-item:hover img { transform: scale(1.1);}
         .gallery-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to top, rgba(15, 5, 32, 0.9), transparent 60%);
             opacity: 0;
             transition: opacity 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 2rem;
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;
         }
-        
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-        
+        .gallery-item:hover .gallery-overlay { opacity: 1;}
         .gallery-caption {
             color: var(--white);
             transform: translateY(20px);
             transition: transform 0.4s ease;
         }
-        
         .gallery-item:hover .gallery-caption {
             transform: translateY(0);
         }
-        
         .gallery-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem; font-weight: 600; margin-bottom: 0.5rem;
             font-family: 'Playfair Display', serif;
         }
-        
         .gallery-description {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 1rem;
+            font-size: 1rem; opacity: 0.9; margin-bottom: 1rem;
         }
-        
         .gallery-price {
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-weight: 600;
+            font-size: 1.5rem; color: var(--gold); font-weight: 600;
         }
-        
         /* Уход за растениями */
         .care-list {
             display: grid;
@@ -366,7 +450,6 @@
             gap: 2rem;
             margin: 3rem 0;
         }
-        
         .care-item {
             background: rgba(42, 10, 74, 0.3);
             border-radius: 12px;
@@ -374,25 +457,21 @@
             border-left: 4px solid var(--accent-purple);
             transition: transform 0.3s ease;
         }
-        
         .care-item:hover {
             transform: translateY(-5px);
             background: rgba(42, 10, 74, 0.4);
         }
-        
         .care-icon {
             font-size: 2.5rem;
             color: var(--neon-purple);
             margin-bottom: 1.5rem;
         }
-        
         .care-title {
             font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--white);
         }
-        
         /* Контакты */
         .contact-grid {
             display: grid;
@@ -400,53 +479,36 @@
             gap: 3rem;
             margin-top: 3rem;
         }
-        
         .contact-info {
             display: flex;
             flex-direction: column;
             gap: 2rem;
         }
-        
         .contact-item {
             display: flex;
             align-items: flex-start;
             gap: 1.5rem;
         }
-        
         .contact-icon {
             color: var(--neon-purple);
             font-size: 1.8rem;
             min-width: 40px;
             text-align: center;
         }
-        
-        .contact-text {
-            flex: 1;
-        }
-        
+        .contact-text { flex: 1;}
         .contact-title {
             font-weight: 600;
             margin-bottom: 0.3rem;
             color: var(--white);
         }
-        
         .contact-form {
             background: rgba(42, 10, 74, 0.3);
             padding: 2.5rem;
             border-radius: 15px;
             border: 1px solid rgba(90, 27, 138, 0.3);
         }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
+        .form-group { margin-bottom: 1.5rem;}
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 500;}
         .form-input, .form-textarea {
             width: 100%;
             padding: 1rem;
@@ -457,18 +519,12 @@
             font-family: 'Montserrat', sans-serif;
             transition: all 0.3s ease;
         }
-        
         .form-input:focus, .form-textarea:focus {
             outline: none;
             border-color: var(--neon-purple);
             box-shadow: 0 0 0 2px rgba(156, 77, 202, 0.3);
         }
-        
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
+        .form-textarea { min-height: 150px; resize: vertical;}
         .submit-btn {
             background: linear-gradient(to right, var(--accent-purple), var(--light-purple));
             color: var(--white);
@@ -484,12 +540,10 @@
             gap: 0.8rem;
             box-shadow: 0 4px 15px rgba(156, 77, 202, 0.4);
         }
-        
         .submit-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(156, 77, 202, 0.6);
         }
-        
         /* Подвал */
         footer {
             background: linear-gradient(135deg, var(--dark-purple), var(--black));
@@ -499,13 +553,11 @@
             border-top: 1px solid rgba(90, 27, 138, 0.3);
             position: relative;
         }
-        
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
         }
-        
         .footer-logo {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
@@ -515,7 +567,6 @@
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
-        
         .footer-links {
             display: flex;
             justify-content: center;
@@ -523,26 +574,22 @@
             gap: 2rem;
             margin-bottom: 3rem;
         }
-        
         .footer-links a {
             color: var(--white);
             text-decoration: none;
             opacity: 0.8;
             transition: opacity 0.3s ease;
         }
-        
         .footer-links a:hover {
             opacity: 1;
             color: var(--neon-purple);
         }
-        
         .social-links {
             display: flex;
             justify-content: center;
             gap: 1.8rem;
             margin: 3rem 0;
         }
-        
         .social-links a {
             display: inline-flex;
             align-items: center;
@@ -558,182 +605,108 @@
             position: relative;
             overflow: hidden;
         }
-        
         .social-links a::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(209, 107, 255, 0.2), transparent);
             transition: all 0.6s ease;
         }
-        
         .social-links a:hover {
             background: var(--accent-purple);
             transform: translateY(-5px) scale(1.1);
             box-shadow: 0 10px 25px rgba(156, 77, 202, 0.5);
         }
-        
-        .social-links a:hover::before {
-            left: 100%;
-        }
-        
+        .social-links a:hover::before { left: 100%;}
         .copyright {
             margin-top: 3rem;
             opacity: 0.7;
             font-size: 0.95rem;
         }
-        
         .back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--accent-purple);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
+            bottom: 30px; right: 30px;
+            width: 50px; height: 50px;
+            background: var(--accent-purple); color: var(--white);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; cursor: pointer;
+            opacity: 0; visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
             box-shadow: 0 5px 15px rgba(156, 77, 202, 0.4);
         }
-        
-        .back-to-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .back-to-top:hover {
-            background: var(--neon-purple);
-            transform: translateY(-5px);
-        }
-        
+        .back-to-top.active { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: var(--neon-purple); transform: translateY(-5px);}
         /* Анимации */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-20px) translateX(-50%); }
-            60% { transform: translateY(-10px) translateX(-50%); }
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        /* Эффекты частиц */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(156, 77, 202, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        
+        @keyframes float { 0%, 100% { transform: translateY(0);} 50% { transform: translateY(-15px);} }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%);} 40% { transform: translateY(-20px) translateX(-50%);} 60% { transform: translateY(-10px) translateX(-50%);} }
+        .floating { animation: float 6s ease-in-out infinite; }
         /* Адаптивность */
         @media (max-width: 1024px) {
-            h1 {
-                font-size: 3.8rem;
-            }
-            
-            section {
-                padding: 2.5rem;
-            }
-            
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            }
+            h1 { font-size: 3.8rem;}
+            section { padding: 2.5rem;}
+            .gallery { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));}
         }
-        
         @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-            
-            h2 {
-                font-size: 2.5rem;
-            }
-            
-            .header-content {
-                padding: 1rem;
-            }
-            
-            .nav-container {
-                gap: 1rem;
-            }
-            
-            nav a {
-                margin: 0 1rem;
-                font-size: 1rem;
-                padding: 0.6rem 0;
-            }
-            
-            section {
-                padding: 2rem;
-            }
-            
-            .care-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 3rem;}
+            h2 { font-size: 2.5rem;}
+            .header-content { padding: 1rem;}
+            .nav-container { gap: 1rem;}
+            nav a { margin: 0 1rem; font-size: 1rem; padding: 0.6rem 0;}
+            section { padding: 2rem;}
+            .care-list { grid-template-columns: 1fr;}
+            .contact-grid { grid-template-columns: 1fr;}
         }
-        
         @media (max-width: 480px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            
-            nav a {
-                margin: 0 0.5rem;
-                font-size: 0.9rem;
-                gap: 0.3rem;
-            }
-            
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-links a {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
+            h1 { font-size: 2.5rem;}
+            h2 { font-size: 2rem;}
+            .subtitle { font-size: 1.2rem;}
+            nav a { margin: 0 0.5rem; font-size: 0.9rem; gap: 0.3rem;}
+            .gallery { grid-template-columns: 1fr;}
+            .social-links a { width: 50px; height: 50px; font-size: 1.5rem;}
         }
     </style>
 </head>
 <body>
+    <!-- Кнопка информации -->
+    <button class="info-btn" id="infoBtn">Информация</button>
+    <!-- Модалка информации -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('infoModal')">&times;</button>
+            <span id="infoText">Добро пожаловать на мой сайт! 
+                Этот сайт я написал по приколу ну и чтобы обучится языку html :)
+                Тут вы можете его полистать и тд но регистрация и покупки не работают так как опять же повторюсь сайт был создан по приколу.
+                Если хотите поддержать меня то вот карта Т-Банка - 2200 7013 6389 4947.
+                Также вы можете изучить код этого сайта тут - https://github.com/Nosochek333/-_Fikus.
+                Если хотите задать вопрос то пишите сюда - @Predlozks_Fikus_bot.
+                Надеюсь код этого сайта поможет вам как то с обучением, удачи в кодинге ;).</span>
+        </div>
+    </div>
+    <!-- Кнопка корзины -->
+    <button class="cart-btn" id="cartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Корзина</span>
+        <span class="cart-btn-count" id="cartCount">0</span>
+    </button>
+    <!-- Модалка корзины -->
+    <div class="modal cart-modal" id="cartModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('cartModal')">&times;</button>
+            <div><b>Корзина</b></div>
+            <div class="cart-items-list" id="cartItemsList"></div>
+            <div class="cart-total" id="cartTotal"></div>
+            <button class="cart-pay-btn" id="cartPayBtn">Оплатить</button>
+        </div>
+    </div>
+    <!-- Модалка спасибо -->
+    <div class="modal" id="thankModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('thankModal')">&times;</button>
+            <span>Спасибо за покупку!</span>
+        </div>
+    </div>
     <!-- Шапка с параллакс эффектом -->
     <div class="header-wrapper">
         <header>
@@ -741,15 +714,13 @@
             <div class="particles" id="particles-js"></div>
             <div class="header-content">
                 <h1 class="floating">PHYCUS</h1>
-                <p class="subtitle">Эксклюзивная коллекция редких фикусов для самых взыскательных ценителей</p>
+                <p class="subtitle">Эксклюзивная коллекция редких фикусов для самых взыскательных ценителей<br> Перед тем как пользоваться сайто обязательно нажмите на кпопку "Информация"</p>
             </div>
             <div class="scroll-down" id="scroll-down">
                 <i class="fas fa-chevron-down"></i>
             </div>
         </header>
     </div>
-
-    
     <!-- Навигация -->
     <nav id="main-nav">
         <div class="nav-container">
@@ -759,48 +730,15 @@
             <a href="#contact"><i class="fas fa-envelope"></i> Контакты</a>
         </div>
     </nav>
-
     <div class="button-container">
         <a href="https://nosochek333.github.io/-_Fikus/register.html" class="reg-button">Регистрация</a>
-      </div>
-      
-      <style>
-        .button-container {
-          position: relative;
-          top: 50px;    /* вниз на 50px */
-          left: 1250px;  /* вправо на 100px */
-        }
-      
-        .reg-button {
-          display: inline-block;
-          background: linear-gradient(135deg, #8e2de2, #4a00e0);
-          color: white;
-          padding: 15px 30px;
-          font-size: 18px;
-          border-radius: 10px;
-          font-weight: 700;
-          text-decoration: none;
-          box-shadow: 0 4px 10px rgba(74, 0, 224, 0.7);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-      
-        .reg-button:hover {
-          transform: scale(1.05);
-          box-shadow: 0 6px 20px rgba(74, 0, 224, 1);
-        }
-      </style>
-      
-    
-    
-    <!-- Основное содержимое -->
+    </div>
     <main>
         <section id="about">
             <h2>О фикусах</h2>
             <p>Фикусы — это не просто растения, это живые скульптуры, созданные природой. Каждый экземпляр в нашей коллекции — результат многолетнего труда и внимательного ухода. Мы собрали самые редкие и красивые сорта фикусов со всего мира, чтобы предложить вам лучшее из мира тропической флоры.</p>
             <p>Наши фикусы — это не просто декор, это инвестиция в красоту вашего пространства. Они очищают воздух, создают уютную атмосферу и становятся центром внимания в любом интерьере.</p>
-            
             <div class="section-divider"></div>
-            
             <div class="care-list">
                 <div class="care-item">
                     <div class="care-icon"><i class="fas fa-globe-americas"></i></div>
@@ -819,13 +757,11 @@
                 </div>
             </div>
         </section>
-        
         <section id="gallery">
             <h2>Наша коллекция</h2>
             <p>Каждое растение в нашей коллекции уникально и проходит строгий отбор. Мы предлагаем только здоровые, ухоженные экземпляры с гарантией качества.</p>
-            
             <div class="gallery">
-                <div class="gallery-item">
+                <div class="gallery-item" data-id="1" data-title="Фикус Бенджамина" data-price="8900">
                     <img src="https://darvin-market.ru/upload/resize_cache/webp/iblock/f67/it3z5n2ql6z08bas05dsl32kasi8d3zn.webp" alt="Фикус Бенджамина">
                     <div class="gallery-overlay">
                         <div class="gallery-caption">
@@ -833,19 +769,21 @@
                             <p class="gallery-description">Элегантное деревце с мелкими листьями, идеально для формирования бонсай.</p>
                             <div class="gallery-price">от 8 900 ₽</div>
                         </div>
+                        <button class="add-to-cart-btn">В корзину</button>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://www.roza4u.ru/image/cache/catalog/gorshechnye-cvety/Fikus_Lirata_Bambino_1-700x700.jpg" alt="Фикус Лирата">
+                <div class="gallery-item" data-id="2" data-title="Фикус Лирата" data-price="12500">
+                    <img src="https://avatars.mds.yandex.net/get-mpic/4944925/2a0000019257a952aa3db8cdab4b7ccfa1ed/orig" alt="Фикус Лирата">
                     <div class="gallery-overlay">
                         <div class="gallery-caption">
                             <h3 class="gallery-title">Фикус Лирата</h3>
                             <p class="gallery-description">Крупные листья в форме скрипки создают эффектный тропический акцент.</p>
                             <div class="gallery-price">от 12 500 ₽</div>
                         </div>
+                        <button class="add-to-cart-btn">В корзину</button>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-id="3" data-title="Фикус Эластика" data-price="7200">
                     <img src="https://www.dubainursery.ae/wp-content/uploads/2022/06/Ficus-elastica-Robusta-Rubber-Plant-XLarge_5000x.jpg" alt="Фикус Эластика">
                     <div class="gallery-overlay">
                         <div class="gallery-caption">
@@ -853,9 +791,10 @@
                             <p class="gallery-description">Классический фикус с крупными глянцевыми листьями, символ уюта и благополучия.</p>
                             <div class="gallery-price">от 7 200 ₽</div>
                         </div>
+                        <button class="add-to-cart-btn">В корзину</button>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-id="4" data-title="Фикус Микрокарпа" data-price="15000">
                     <img src="https://semena-ural.ru/wp-content/uploads/8/8/4/8840d1ccaaaa8c5eab6555bb050a171f.jpeg" alt="Фикус Микрокарпа">
                     <div class="gallery-overlay">
                         <div class="gallery-caption">
@@ -863,9 +802,10 @@
                             <p class="gallery-description">Эффектное растение с мощными воздушными корнями, идеально для стиля бонсай.</p>
                             <div class="gallery-price">от 15 000 ₽</div>
                         </div>
+                        <button class="add-to-cart-btn">В корзину</button>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-id="5" data-title="Фикус Биннендийка" data-price="9800">
                     <img src="https://vsegda-pomnim.com/uploads/posts/2024-01/1705124229_vsegda-pomnim-com-p-fikus-benedikta-foto-22.jpg" alt="Фикус Биннендийка">
                     <div class="gallery-overlay">
                         <div class="gallery-caption">
@@ -873,9 +813,10 @@
                             <p class="gallery-description">Изящное растение с длинными узкими листьями, напоминающее пальму.</p>
                             <div class="gallery-price">от 9 800 ₽</div>
                         </div>
+                        <button class="add-to-cart-btn">В корзину</button>
                     </div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" data-id="6" data-title="Фикус Пумила" data-price="6500">
                     <img src="https://touk.ru/wp-content/uploads/2024/02/fikus-karlikovij-7p46dprm.jpg" alt="Фикус Пумила">
                     <div class="gallery-overlay">
                         <div class="gallery-caption">
@@ -883,15 +824,14 @@
                             <p class="gallery-description">Ампельное растение с мелкими листьями, прекрасно для вертикального озеленения.</p>
                             <div class="gallery-price">от 6 500 ₽</div>
                         </div>
+                        <button class="add-to-cart-btn">В корзину</button>
                     </div>
                 </div>
             </div>
         </section>
-        
         <section id="care">
             <h2>Уход за фикусами</h2>
             <p>Фикусы требуют внимательного ухода, но вознаграждают за это своей красотой и долголетием. Наши эксперты разработали комплексный подход к уходу за этими растениями.</p>
-            
             <div class="care-list">
                 <div class="care-item">
                     <div class="care-icon"><i class="fas fa-sun"></i></div>
@@ -922,4 +862,201 @@
                     <div class="care-icon"><i class="fas fa-cut"></i></div>
                     <h3 class="care-title">Обрезка</h3>
                     <p>Регулярная формирующая обрезка помогает создать красивую крону. Лучшее время для обрезки — ранняя весна.</p>
-               
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <h2>Контакты</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                        <span class="contact-text">
+                            <span class="contact-title">Адрес</span>
+                            г. Москва, ул. Цветочная, 16, офис 14
+                        </span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                        <span class="contact-text">
+                            <span class="contact-title">E-mail</span>
+                            <a href="mailto:info@phycus.ru" style="color:var(--neon-purple);">info@phycus.ru</a>
+                        </span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-phone"></i></span>
+                        <span class="contact-text">
+                            <span class="contact-title">Телефон</span>
+                            <a href="tel:+74951234567" style="color:var(--neon-purple);">+7 (495) 123-45-67</a>
+                        </span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-clock"></i></span>
+                        <span class="contact-text">
+                            <span class="contact-title">Время работы</span>
+                            Пн–Пт: 10:00–19:00, Сб: 11:00–17:00
+                        </span>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm" autocomplete="off">
+                    <div class="form-group">
+                        <label class="form-label" for="cf-name">Имя</label>
+                        <input class="form-input" type="text" id="cf-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="cf-email">E-mail</label>
+                        <input class="form-input" type="email" id="cf-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="cf-message">Сообщение</label>
+                        <textarea class="form-textarea" id="cf-message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Отправить</button>
+                    <div id="formMessage" style="margin-top:1em;font-size:1em;"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">PHYCUS</div>
+            <div class="footer-links">
+                <a href="#about">О фикусах</a>
+                <a href="#gallery">Коллекция</a>
+                <a href="#care">Уход</a>
+                <a href="#contact">Контакты</a>
+                <a href="https://nosochek333.github.io/-_Fikus/register.html">Регистрация</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 PHYCUS | Все права защищены.
+            </div>
+        </div>
+        <div class="back-to-top" id="backToTop"><i class="fas fa-angle-up"></i></div>
+    </footer>
+    <script>
+        // Модальные окна
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+        document.getElementById('infoBtn').onclick = function() {
+            openModal('infoModal');
+        };
+        // Корзина
+        let cart = {};
+        function updateCartCount() {
+            const count = Object.values(cart).reduce((acc, cur) => acc + cur.qty, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+        function renderCart() {
+            const cartItemsList = document.getElementById('cartItemsList');
+            cartItemsList.innerHTML = '';
+            let total = 0;
+            let hasItems = false;
+            for (let id in cart) {
+                hasItems = true;
+                let item = cart[id];
+                total += item.price * item.qty;
+                let div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <span class="cart-item-title">${item.title}</span>
+                    <div class="cart-item-controls">
+                        <button class="cart-item-btn" onclick="changeQty('${id}', -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="cart-item-btn" onclick="changeQty('${id}', 1)">+</button>
+                        <span>${item.price * item.qty} ₽</span>
+                    </div>
+                `;
+                cartItemsList.appendChild(div);
+            }
+            if (!hasItems) {
+                cartItemsList.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
+            }
+            document.getElementById('cartTotal').textContent = hasItems ? `Общая сумма: ${total} ₽` : '';
+        }
+        function changeQty(id, delta) {
+            if (!cart[id]) return;
+            cart[id].qty += delta;
+            if (cart[id].qty <= 0) delete cart[id];
+            updateCartCount();
+            renderCart();
+        }
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.onclick = function(e) {
+                const item = btn.closest('.gallery-item');
+                const id = item.dataset.id, title = item.dataset.title, price = +item.dataset.price;
+                if (!cart[id]) cart[id] = { title, price, qty: 0 };
+                cart[id].qty += 1;
+                updateCartCount();
+            };
+        });
+        document.getElementById('cartBtn').onclick = function() {
+            renderCart();
+            openModal('cartModal');
+        };
+        document.getElementById('cartPayBtn').onclick = function() {
+            closeModal('cartModal');
+            openModal('thankModal');
+            cart = {};
+            updateCartCount();
+        };
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.onclick = function(e) {
+                if (e.target === modal) closeModal(modal.id);
+            }
+        });
+        updateCartCount();
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        backToTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Scroll down arrow
+        document.getElementById('scroll-down').onclick = () => {
+            document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+        };
+        // Contact form
+        document.getElementById('contactForm').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('formMessage').textContent = "Спасибо! Ваше сообщение отправлено.";
+            document.getElementById('formMessage').style.color = "var(--green)";
+            setTimeout(() => { document.getElementById('formMessage').textContent = ""; }, 4000);
+            this.reset();
+        };
+        // Партиклы
+        function createParticle() {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 18 + 8;
+            p.style.width = p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            p.style.opacity = Math.random() * 0.65 + 0.15;
+            document.getElementById('particles-js').appendChild(p);
+        }
+        for(let i=0;i<32;i++) createParticle();
+        // Theme toggler (добавить)
+        /*
+        const themeToggler = document.createElement('button');
+        themeToggler.className = 'theme-toggler';
+        themeToggler.innerHTML = '<i class="fas fa-moon"></i> Тема';
+        document.body.append(themeToggler);
+        themeToggler.onclick = function() {
+            document.body.classList.toggle('dark');
+        };*/
+    </script>
+</body>
+</html>
